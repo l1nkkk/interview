@@ -65,9 +65,9 @@
     * [waitpid()](#waitpid)
     * [孤儿进程](#孤儿进程)
     * [僵尸进程](#僵尸进程)
-    * [守护进程](#守护进程)
+    * [守护进程](#守护进程（daemon）)
 * [十一、监控](#系统性能监控)
-    * [系统负荷](#系统负荷)
+    * [系统负荷](#系统负荷load_average)
 * [参考资料](#参考资料)
 <!-- GFM-TOC -->
 
@@ -1256,7 +1256,7 @@ https://www.zhihu.com/question/38609004/answer/202859302
 # netstat -anp | grep port
 ```
 
-## 系统负荷(load average)
+## 系统负荷load_average
 > https://www.ruanyifeng.com/blog/2011/07/linux_load_average_explained.html  
 
 有三个数，分别是一分钟，五分钟，十五分钟。有多少个核不用进程等待的临界值就是多少，比如八核就是8。如果一般超过该值，就需要动手干预了，说明系统不是在最佳状态，所有的进程不能第一时间得到处理。  
