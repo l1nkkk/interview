@@ -1,5 +1,6 @@
 <!-- GFM-TOC -->
 * [一、概述](#一概述)
+    * [特性](#特性)
 * [二、数据类型](#二数据类型)
     * [STRING](#string)
     * [LIST](#list)
@@ -47,11 +48,40 @@
 
 # 一、概述
 
-Redis 是速度非常快的非关系型（NoSQL）内存键值数据库，可以存储键和五种不同类型的值之间的映射。
+- Redis 是速度非常快的非关系型（NoSQL）内存键值数据库，可以存储键和五种不同类型的值之间的映射。
 
-键的类型只能为字符串，值支持五种数据类型：字符串、列表、集合、散列表、有序集合。
+- 键的类型只能为字符串，值支持五种数据类型：字符串、列表、集合、散列表、有序集合。
 
-Redis 支持很多特性，例如将内存中的数据持久化到硬盘中，使用复制来扩展读性能，使用分片来扩展写性能。
+- Redis 支持很多特性，例如将内存中的数据持久化到硬盘中，使用复制来扩展读性能，使用分片来扩展写性能。
+- 用c语言写的只有23000line代码
+- 使用key-value这样的字典结构
+## 特性
+<div align="center"> <img src="./pic/Picture1.png" width="400"/> </div><br>
+
+1）速度快  
+a.Redis将数据存在内存  
+b.他说用c语言实现的（代码也写的好）  
+c.采用单线程：不用去过多处理并发安全，而且单线程更快基于其将数据存在内存，避免io操作,上下文切换  
+d.使用了epoll多路复用 
+2）持久化（断电不丢数据）  
+a.Redis所有数据保存在内存中，对数据的更新将异步地保存到磁盘上。  
+3）多种数据结构  
+a. 主要的五种数据结构  
+![](pic/Picture2.png)
+b. 衍生的三种  
+![](pic/Picture6.png)
+4）多种语言支持
+![](pic/Picture3.png)
+5）功能丰富
+![](pic/Picture4.png)
+6）简单  
+a.不依赖外部库  
+b.单线程模型  
+7）主从复制 
+![](pic/Picture5.png)
+8）高可用、分布式  
+a.高可用：Redis-Sentinel(v2.8)支持高可用  
+b.分布式：Redis-Cluster(v3.0)支持分布式  
 
 # 二、数据类型
 
@@ -210,7 +240,7 @@ OK
 ## 字典
 
 dictht 是一个散列表结构，使用拉链法解决哈希冲突。
-
+>hash冲突：https://www.cnblogs.com/jing99/p/6985618.html
 ```c
 /* This is our hash table structure. Every dictionary has two of this as we
  * implement incremental rehashing, for the old to the new table. */
@@ -312,7 +342,7 @@ int dictRehash(dict *d, int n) {
 ```
 
 ## 跳跃表
-
+> 跳跃表介绍：https://www.cnblogs.com/thrillerz/p/4505550.html  
 是有序集合的底层实现之一。
 
 跳跃表是基于多指针有序链表实现的，可以看成多个有序链表。
