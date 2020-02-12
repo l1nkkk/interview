@@ -343,6 +343,8 @@ int dictRehash(dict *d, int n) {
 
 ## 跳跃表
 > 跳跃表介绍：https://www.cnblogs.com/thrillerz/p/4505550.html  
+
+
 是有序集合的底层实现之一。
 
 跳跃表是基于多指针有序链表实现的，可以看成多个有序链表。
